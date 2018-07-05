@@ -110,7 +110,7 @@ var jwt = require('../services/jwt');
             return res.status(404).send({message: 'No se ha podido actualizar el usuario.'});
         }
 
-        return res.status(200).send({user: userUpdated});         
+        return res.status(200).send({image: file_name, user: userUpdated});         
      });
  }
 
