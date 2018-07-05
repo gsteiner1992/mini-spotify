@@ -131,11 +131,11 @@ function uploadImage(req, res) {
 
     Album.findByIdAndUpdate(albumId, {image: file_name}, (err, albumUpdated) => {
        if (err) {
-           return res.status(500).send({message: 'Error al actualizar usuario.'}); 
+           return res.status(500).send({message: 'Error al actualizar album.'}); 
        }
 
        if (!albumUpdated) {
-           return res.status(404).send({message: 'No se ha podido actualizar el usuario.'});
+           return res.status(404).send({message: 'No se ha podido actualizar el album.'});
        }
 
        return res.status(200).send({album: albumUpdated});         
