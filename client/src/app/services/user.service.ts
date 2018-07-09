@@ -7,6 +7,8 @@ import { GLOBAL } from "./global";
 @Injectable()
 export class UserService {
     public url: string;
+    public identity;
+    public token;
 
     constructor(private _http: Http){
         this.url = GLOBAL.url;
@@ -24,5 +26,31 @@ export class UserService {
 
         return this._http.post(this.url + 'login', params, {headers: headers})
             .map(res => res.json());
+    }
+
+    register(user_to_register) {
+        let json = JSON.stringify(user_to_register);
+        let params = json;
+
+        let headers = new Headers({'Content-Type' : 'application/json'});
+
+        return this._http.post(this.url + 'register', params, {headers: headers})
+            .map(res => res.json());
+    }
+
+    getIdentity() {
+        let identity = JSON.parse(localStorage.getItem('identity'));
+
+        this.identity = identity != 'undefined' ? identity : null;
+
+        return this.identity;
+    }
+
+    getToken() {
+        let token = localStorage.getItem('token');
+
+        this.token = token != "undefined" ? token : null;
+
+        return this.token;
     }
 }

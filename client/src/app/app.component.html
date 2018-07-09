@@ -1,5 +1,12 @@
 <div *ngIf="identity" class="navigation col-lg-1">
   <h1>{{title}}</h1>
+  <span>
+    {{identity.name}} {{identity.surname}}
+  </span>
+
+  <span class="btn btn-warning" (click) = "logout()">
+    Cerrar sesion
+  </span>
 </div>
 
 <div class="clearfix"></div>
@@ -39,25 +46,30 @@
         </div>
         <div class="col-lg-6">
           <h1>Registrate</h1>
-          <form>
+          <div *ngIf="alertRegister">
+            <div class="alert alert-info">
+               {{alertRegister}}
+            </div>
+          </div>
+          <form #registerForm = "ngForm" (ngSubmit) = "onSubmitRegister()">
               <p>
                   <label for="">Nombre:</label>
-                  <input type="text" class="form-control" required>
+                  <input type="text" #name="ngModel" name="name" [(ngModel)] = "user_register.name" class="form-control" required>
               </p>
       
               <p>
                   <label for="">Apellidos:</label>
-                  <input type="text" class="form-control" required>
+                  <input type="text" #surname="ngModel" name="surname" [(ngModel)] = "user_register.surname" class="form-control" required>
               </p>
       
               <p>
                 <label for="">Correo electronico:</label>
-                <input type="text" class="form-control" required>
+                <input type="text" #email="ngModel" name="email" [(ngModel)] = "user_register.email" class="form-control" required>
               </p>
       
               <p>
                 <label for="">Password:</label>
-                <input type="password" class="form-control" required>
+                <input type="password" #password="ngModel" name="password" [(ngModel)] = "user_register.password" class="form-control" required>
               </p>
       
               <input type="submit" value="Registrar" class="btn btn-primary">
