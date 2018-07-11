@@ -1,0 +1,35 @@
+<div class="col-lg-6">
+    <h1>{{titulo}}</h1>
+    <div *ngIf="responseMessage">
+        <div class="alert alert-info">
+            {{responseMessage}}
+        </div>
+    </div>
+    <form #userUpdateForm="ngForm" (ngSubmit)="onSubmit()">
+        <p>
+            <label for="">Nombre:</label>
+            <input type="text" #name="ngModel" name="name" [(ngModel)]="user.name" class="form-control" required>
+        </p>
+
+        <p>
+            <label for="">Apellidos:</label>
+            <input type="text" #surname="ngModel" name="surname" [(ngModel)]="user.surname" class="form-control" required>
+        </p>
+
+        <p>
+            <label for="">Correo electronico:</label>
+            <input type="text" #email="ngModel" name="email" [(ngModel)]="user.email" class="form-control" required>
+        </p>
+
+        <div class="image_for_edit" *ngIf="user.image && user.image != 'null'">
+            <img src="" alt="">
+        </div>
+
+        <p>
+            <label for="">Sube tu foto:</label>
+            <input type="file" placeholder="Subir imagen...">
+        </p>
+        <input type="submit" value="Actualizar usuario" class="btn btn-primary">
+    </form>
+
+</div>
