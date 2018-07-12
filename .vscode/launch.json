@@ -5,19 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/client"
+        },
+        {
             "type": "node",
             "request": "attach",
             "name": "Node: Nodemon",
             "processId": "${command:PickProcess}",
             "restart": true,
             "protocol": "inspector",
-        },
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Launch Chrome",
-            "url": "http://localhost:3977",
-            "webRoot": "${workspaceFolder}/index.js"
         }
     ]
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from "./models/user";
 import { UserService } from "./services/user.service";
+import { GLOBAL } from "./services/global";
 
 @Component({
   selector: 'app-root',
@@ -10,17 +11,19 @@ import { UserService } from "./services/user.service";
 export class AppComponent implements OnInit {
   public title = 'MUSIFY';
   public user: User;
-  public user_register : User;
+  public user_register: User;
   public identity;
   public token;
   public errorMessage;
   public alertRegister;
+  public url: String;
 
   constructor(
-    private _userService : UserService
-  ){
+    private _userService: UserService
+  ) {
     this.user = new User('', '', '', '', '', 'ROLE_USER', '');
     this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
+    this.url = GLOBAL.url;
   }
 
   ngOnInit() {
@@ -35,7 +38,7 @@ export class AppComponent implements OnInit {
         let identity = response.user;
         this.identity = identity;
 
-        if (!this.identity._id){
+        if (!this.identity._id) {
           alert("El usuario no esta correctamente identificado.")
         } else {
           localStorage.setItem('identity', JSON.stringify(identity));
@@ -44,23 +47,23 @@ export class AppComponent implements OnInit {
             response => {
               let token = response.token;
               this.token = token;
-      
-              if (this.token.length <= 0){
+
+              if (this.token.length <= 0) {
                 alert("El token no se ha generado.")
               } else {
                 localStorage.setItem('token', token);
                 this.user = new User('', '', '', '', '', 'ROLE_USER', '');
               }
-      
+
               console.log(response);
             },
             error => {
               this.errorMessage = <any>error;
-      
-              if (this.errorMessage != null){
+
+              if (this.errorMessage != null) {
                 var body = JSON.parse(error._body);
                 this.errorMessage = body.message;
-      
+
                 console.log(error);
               }
             }
@@ -72,7 +75,7 @@ export class AppComponent implements OnInit {
       error => {
         this.errorMessage = <any>error;
 
-        if (this.errorMessage != null){
+        if (this.errorMessage != null) {
           var body = JSON.parse(error._body);
           this.errorMessage = body.message;
 
@@ -110,7 +113,7 @@ export class AppComponent implements OnInit {
       error => {
         this.errorMessage = <any>error;
 
-        if (this.errorMessage != null){
+        if (this.errorMessage != null) {
           var body = JSON.parse(error._body);
           this.alertRegister = body.message;
 
