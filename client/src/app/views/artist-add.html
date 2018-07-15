@@ -1,4 +1,4 @@
-<div class="col-lg-6">
+<div class="col-lg-6" *ngIf="identity && identity.role == 'ROLE_ADMIN'">
     <h1>{{titulo}}</h1>
     <div *ngIf="alertMessage">
         <div class="alert alert-info">
@@ -22,14 +22,24 @@
             </span>
         </div>
 
-        <div *ngIf="is_edit">
-            <div *ngIf="artist.image != 'null'" class="image_for_edit">
-                <img src="{{url + 'get-image-artist/' + artist.image}}" alt="">
+        <div class="form-group">
+            <div *ngIf="is_edit">
+                <div class="artist_image_for_edit" *ngIf="artist.image && artist.image != 'null'">
+                    <img src="{{url + 'get-image-artist/' + artist.image}}" alt="">
+                </div>
+
                 <label for="">Subir imagen de artista</label>
                 <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)">
             </div>
         </div>
 
+
+
         <input type="submit" value="{{titulo}}" [disabled]="!formArtist.form.valid" class="btn btn-success" />
     </form>
+</div>
+
+<div class="col-lg-6" *ngIf="!identity || identity.role != 'ROLE_ADMIN'">
+    <h1>Error</h1>
+    <p>No tienes acceso a esta parte de la aplicación.</p>
 </div>

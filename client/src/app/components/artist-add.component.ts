@@ -50,6 +50,8 @@ export class ArtistAddComponent implements OnInit {
                 }
                 this.alertMessage = 'Artista creado correctamente.';
                 this.artist = response.artist;
+
+                this._router.navigate(['/editar-artista', response.artist._id]);
             },
             error => {
                 var errorMessage = <any>error;

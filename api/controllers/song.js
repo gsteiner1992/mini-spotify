@@ -117,7 +117,7 @@ function uploadFile(req, res) {
     }
 
     var file_path = req.files.file.path;
-    var file_split = file_path.split('\/');
+    var file_split = file_path.split('\\');
     var file_name  = file_split[2];
 
     var file_ext = file_name.split('\.')[1];
