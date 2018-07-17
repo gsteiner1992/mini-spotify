@@ -48,6 +48,8 @@ export class ArtistDetailComponent implements OnInit {
                     }
 
                     this.artist = response.artist;
+
+                    //Obtener álbumes del artista
                 },
                 error => {
                     var errorMessage = <any>error;

@@ -1,0 +1,51 @@
+<div class="col-lg-6" *ngIf="identity && identity.role == 'ROLE_ADMIN'">
+    <h1>{{titulo}}</h1>
+    <div *ngIf="alertMessage">
+        <div class="alert alert-info">
+            {{alertMessage}}
+        </div>
+    </div>
+    <form #formAlbum="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="">Titulo</label>
+            <input class="form-control" type="text" #title="ngModel" name="title" [(ngModel)]="album.title" required>
+            <span *ngIf="!title.valid && title.touched">
+                El título es obligatorio
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label for="">Descripción</label>
+            <textarea class="form-control" #description="ngModel" name="description" [(ngModel)]="album.description"></textarea>
+            <span *ngIf="!description.valid && description.touched">
+                La descripción es obligatoria
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label for="">Año</label>
+            <input class="form-control" #year="ngModel" name="year" [(ngModel)]="album.year" />
+            <span *ngIf="!year.valid && year.touched">
+                La año es obligatoria
+            </span>
+        </div>
+
+        <div class="form-group">
+            <div *ngIf="is_edit">
+                <div class="album_image_for_edit" *ngIf="album.image && album.image != 'null'">
+                    <img src="{{url + 'get-image-album/' + album.image}}" alt="">
+                </div>
+
+                <label for="">Subir imagen de álbum</label>
+                <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)">
+            </div>
+        </div>
+
+        <input type="submit" value="{{titulo}}" [disabled]="!formAlbum.form.valid" class="btn btn-success" />
+    </form>
+</div>
+
+<div class="col-lg-6" *ngIf="!identity || identity.role != 'ROLE_ADMIN'">
+    <h1>Error</h1>
+    <p>No tienes acceso a esta parte de la aplicación.</p>
+</div>
