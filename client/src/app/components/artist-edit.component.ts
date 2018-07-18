@@ -78,21 +78,22 @@ export class ArtistEditComponent implements OnInit {
                     if (!response.artist) {
                         return this.alertMessage = 'Error en el servidor';
                     }
+                    this.alertMessage = 'Artista actualizado correctamente.';
 
+                    if (!this.filesToUpload){
+                        return this._router.navigate(['/artista', id]);
+                    }
 
                     this._uploadService.makeFileRequest(this.url + 'upload-image-artist/' + id, [], this.filesToUpload, this.token, 'image')
                         .then(
                             (result) => {
-                                this._router.navigate(['/artists', 1]);
+                                this._router.navigate(['/artista', id]);
                             },
                             (error) => {
                                 console.log(error);
                             }
 
                         )
-
-                    this.alertMessage = 'Artista actualizado correctamente.';
-                    //this.artist = response.artist;
                 },
                 error => {
                     var errorMessage = <any>error;

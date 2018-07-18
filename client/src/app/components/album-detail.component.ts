@@ -3,60 +3,54 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 
 import { GLOBAL } from "../services/global";
 import { UserService } from "../services/user.service";
-import { ArtistService } from "../services/artist.service";
 import { AlbumService } from "../services/album.service";
-import { Artist } from "../models/artist";
+
 import { Album } from "../models/album";
 
 @Component({
-    selector: 'album-add',
-    templateUrl: '../views/album-add.html',
-    providers: [UserService, ArtistService, AlbumService]
+    selector: 'album-detail',
+    templateUrl: '../views/album-detail.html',
+    providers: [UserService, AlbumService]
 })
 
-export class AlbumAddComponent implements OnInit {
-    public titulo: String;
-    public artist: Artist;
+export class AlbumDetailComponent implements OnInit {
     public album: Album;
     public identity;
     public token;
     public url: String;
     public alertMessage;
-    public filesToUpload: Array<File>;
 
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
         private _userService: UserService,
-        private _artistService: ArtistService,
         private _albumService: AlbumService
     ) {
-        this.titulo = 'Crear nuevo álbum';
         this.identity = _userService.getIdentity();
         this.token = _userService.getToken();
         this.url = GLOBAL.url;
-        this.album = new Album('', '', 2017, '', '');
     }
 
     ngOnInit(): void {
-        console.log('album-add.component.ts cargado');
+        console.log('album-detail.component.ts cargado');
+
+        //Sacar album de la BD
+        this.getAlbum();
     }
 
-    onSubmit() {
+    getAlbum() {
+        console.log("Método get album.");
+
         this._route.params.forEach((params: Params) => {
-            let artist_id = params['artist'];
-            this.album.artist = artist_id;
+            let id = params['id'];
 
-            this._albumService.addAlbum(this.token, this.album).subscribe(
+            this._albumService.getAlbum(this.token, id).subscribe(
                 response => {
-
                     if (!response.album) {
-                        return this.alertMessage = 'Error en el servidor';
+                        return this._router.navigate(['/']);
                     }
-                    this.alertMessage = 'Álbum creado correctamente.';
-                    this.album = response.album;
 
-                    this._router.navigate(['/editar-album', response.album._id]);
+                    this.album = response.album;
                 },
                 error => {
                     var errorMessage = <any>error;
@@ -65,10 +59,8 @@ export class AlbumAddComponent implements OnInit {
                         var body = JSON.parse(error._body);
                     }
                 }
-            );
-            console.log(this.album);
+            )
         });
-
-
     }
+
 }
