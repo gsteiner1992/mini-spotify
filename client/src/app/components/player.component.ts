@@ -18,6 +18,14 @@ export class PlayerComponent implements OnInit {
 
     ngOnInit(): void {
         console.log("Player cargado");
+
+        var song = JSON.parse(localStorage.getItem("sound_song"));
+
+        if (song){
+            return this.song = song;
+        }
+
+        this.song = new Song(1, '', '', '', '');
     }
 
 }

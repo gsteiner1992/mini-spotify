@@ -121,6 +121,7 @@ html, body {
     height: 317px;
     border: 1px solid #444;
     margin-left: 20px;
+    background: #222326;
 }
 
 .artist-item .artist-image,
