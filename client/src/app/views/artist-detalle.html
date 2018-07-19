@@ -18,7 +18,7 @@
 
         <div id="gallery-albums" *ngIf="albums">
                 <ul class="album-list">
-                        <li *ngFor="let album of albums" class="col-lg-3 album-item">
+                        <li *ngFor="let album of albums" class="col-lg-2 album-item">
                                 <div class="album-image">
                                         <img src="{{url + 'get-image-album/' + album.image}}">
                                 </div>
@@ -49,5 +49,6 @@
                                 </div>
                         </li>
                 </ul>
+                <div class="clearfix"></div>
         </div>
 </div>

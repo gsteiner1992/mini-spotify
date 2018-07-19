@@ -15,20 +15,26 @@ import { AlbumAddComponent } from "./components/album-add.component";
 import { AlbumEditComponent } from "./components/album-edit.component";
 import { AlbumDetailComponent } from "./components/album-detail.component";
 
+//import cancion
+import { SongAddComponent } from "./components/song-add.component";
+import { SongEditComponent } from "./components/song-edit.component";
+
 //home
 import { HomeComponent } from "./components/home.component";
 
 const appRoutes: Routes = [
-    {path:'', component: HomeComponent},
-    {path:'artists/:page', component: ArtistListComponent},
-    {path:'crear-artista', component: ArtistAddComponent},
-    {path:'editar-artista/:id', component: ArtistEditComponent},
-    {path:'artista/:id', component: ArtistDetailComponent},
-    {path:'mis-datos', component: UserEditComponent},
-    {path:'crear-album/:artist', component: AlbumAddComponent},
-    {path:'editar-album/:id', component: AlbumEditComponent},
-    {path:'album/:id', component: AlbumDetailComponent},
-    {path:'**', component: HomeComponent}
+    { path: '', component: HomeComponent },
+    { path: 'artists/:page', component: ArtistListComponent },
+    { path: 'crear-artista', component: ArtistAddComponent },
+    { path: 'editar-artista/:id', component: ArtistEditComponent },
+    { path: 'artista/:id', component: ArtistDetailComponent },
+    { path: 'mis-datos', component: UserEditComponent },
+    { path: 'crear-album/:artist', component: AlbumAddComponent },
+    { path: 'editar-album/:id', component: AlbumEditComponent },
+    { path: 'album/:id', component: AlbumDetailComponent },
+    { path: 'crear-cancion/:album', component: SongAddComponent },
+    { path: 'editar-tema/:id', component: SongEditComponent },
+    { path: '**', component: HomeComponent }
 ];
 
 export const appRoutingProviders: any[] = [];

@@ -84,7 +84,7 @@ function updateSong(req, res) {
             return res.status(500).send({message: 'Error en el servidor.'});
         }
 
-        if (!songStored) {
+        if (!songUpdated) {
             return res.status(404).send({message: 'Canción no ha sido actualizado.'}); 
         }
 
@@ -100,7 +100,7 @@ function deleteSong(req, res) {
             return res.status(500).send({message: 'Error en el servidor.'});
         }
 
-        if (!songStored) {
+        if (!songRemoved) {
             return res.status(404).send({message: 'Canción no ha sido eliminada.'}); 
         }
 
